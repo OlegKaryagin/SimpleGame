@@ -1,5 +1,34 @@
 import React from 'react';
 import '../Log.css';
+import axios from 'axios'
+
+
+
+function handleSubmit(e) {
+  e.preventDefault()
+  const {username, password, password_2 } = e.target.elements
+  console.log({username: username.value, password: password.value})
+  // let reqInstance = axios.create(
+  //   {
+      
+  //   }
+  // )
+  // let comment = reqInstance.get('http://51.250.97.189:8080/auth/signup').then((response) => {
+  //   // console.log(response.data)
+  //   return response.data
+  // });
+
+  const json = JSON.stringify({ login: username.value, password: password.value});
+  console.log(json)
+  const res = axios.post('http://51.250.97.189:8080/auth/signin', json,
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin' : '*'
+    }
+  })
+  console.log(res.data)
+}
 
 const Log = () => {
   return (
@@ -21,7 +50,7 @@ const Log = () => {
             <div className="flex-wrapper-two"><p className="font_1">e</p></div>
           </div>
         </div>
-        <div className="count-2">
+        {/* <div className="count-2">
           <div className="flex-wrapper-fourteen">
             <div className="flex-wrapper-eleven">
               <p className="font_1">Login:</p>
@@ -39,7 +68,13 @@ const Log = () => {
           <a href="MainAfterLog.html"> <div className="flex-wrapper-nine">
               <p className="font_1">Enter</p>
             </div> </a>
-        </div>
+        </div> */}
+
+<form onSubmit={handleSubmit}>
+   <input type="text" id="username"/>
+   <input type="text" id="password"/>
+   <input type="submit" value="Login" />
+</form>
       </div>
     </div>
   );

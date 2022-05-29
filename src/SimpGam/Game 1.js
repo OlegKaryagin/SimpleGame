@@ -1,8 +1,35 @@
 import React from 'react';
 import '../Game.css';
-import DS from '../DS.jpg';
+import DS from '../DS.jpeg';
+import axios from 'axios'
+
 
 const Game1 = () => {
+
+    // const [comment, setComment] = React.useState(null);
+    // React.useEffect(() => {
+    //   axios.get('http://51.250.97.189:8080/comment/get?game_id=1',
+    //   {
+    //     'Signature':'b863da84-0c3c-44fa-a2f9-fd6dd8d8bccd',
+    //     // 'Game-Id': 1
+    //   }
+    //   ).then((response) => {
+    //     setComment(response.data);
+    //   });
+    // }, []);
+
+    let reqInstance = axios.create(
+      {
+        headers: {
+          Signature: 'b863da84-0c3c-44fa-a2f9-fd6dd8d8bccd'
+        }
+      }
+    )
+    let comment = reqInstance.get('http://51.250.97.189:8080/comment/get?game_id=1').then((response) => {
+      // console.log(response.data)
+      return response.data
+    });
+    console.log(comment)
     return (
         <div>
           <meta charSet="utf-8" />
